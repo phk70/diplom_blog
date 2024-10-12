@@ -1,0 +1,17 @@
+{% extends "blog/base.html" %}
+{% load static %}
+
+{% block content %}
+    <div class="post">
+        {% if post.published_date %}
+            <div class="date">
+                {{ post.published_date}}
+            </div>
+        {% endif %}
+        <h1>{{ post.title }}</h1>
+        {% if post.image %}
+            <img src="{{ post.image.url }}" width="500">
+        {% endif %}    
+        <p>{{ post.text | linebreaksbr }}</p>
+    </div>
+{% endblock content %}
