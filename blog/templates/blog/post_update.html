@@ -1,6 +1,22 @@
 {% extends "blog/base.html" %}
 {% load static %}
-{% block title %}TravelMap - Обновление записи{% endblock title %}
+{% block title %}TravelMap - Обновление записи {{ post.title }}{% endblock title %}
 {% block content %}
-    <h1>POST_UPDATE</h1>
+<div>
+    <h1>Изменение записи {{ post.title }}</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div>            
+            <input class="mb-3" type="text" value="{{ post.title }}" placeholder="Заголовок записи" name="title" id="title">
+            <br>            
+            <input class="mb-3" type="text" value="{{ post.text }}" placeholder="Основной текст" name="text" id="text">
+            <br>
+            <img src="{{ post.photo.url }}" width="500">
+            <br>
+            <input class="mb-3" type="file" accept="image/*" name="image" id="image">            
+            <br>
+            <button class="btn btn-success" type="submit" name="Add" value="Add">Изменить</button>
+        </div>
+    </form>
+</div>
 {% endblock content %}

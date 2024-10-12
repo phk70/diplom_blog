@@ -33,4 +33,14 @@ def post_delete(request, pk):
     return render(request, "blog/post_delete.html", {'post': post})
 
 def post_update(request, pk):
-    pass
+    post = Post.objects.get(pk=pk)
+    if request.method == "POST":  
+        post.author = request.user      
+        post.title = request.POST.get('title')
+        post.image = request.FILES.get("image", post.image)
+        post.text = request.POST.get('text')  
+        post.published_date = timezone.now()
+        post.created_date = timezone.now()      
+        post.save()
+        return redirect('/', permanent=True)    
+    return render(request, 'blog/post_update.html')
