@@ -7,7 +7,9 @@ from .models import Post
 
 def post_list(request):
     # posts=Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
-    posts = Post.objects.all()
+    # posts = Post.objects.all()
+    qset = Post.objects.all()
+    posts = qset.order_by('-published_date')
     return render(request, 'blog/post_list.html', {'posts': posts})
 
 
@@ -33,6 +35,7 @@ def post_delete(request, pk):
     return render(request, "blog/post_delete.html", {'post': post})
 
 def post_update(request, pk):
+    
     post = Post.objects.get(pk=pk)
     if request.method == "POST":  
         post.author = request.user      
@@ -43,4 +46,4 @@ def post_update(request, pk):
         post.created_date = timezone.now()      
         post.save()
         return redirect('/', permanent=True)    
-    return render(request, 'blog/post_update.html')
+    return render(request, 'blog/post_update.html', {"post": post})
