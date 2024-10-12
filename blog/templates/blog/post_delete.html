@@ -2,5 +2,14 @@
 {% load static %}
 {% block title %}TravelMap - Удаление записи{% endblock title %}
 {% block content %}
-<h1>POST_DELETE</h1>
+    <h1>Удаление продукта</h1>
+    <form method="post">
+        {% csrf_token %}
+        <div>
+            <label class="block text-gray text-sm font mb-2">Вы уверены что хотите удалить запись {{ post.title }}?</label>            
+            <img="{{ post.photo.url }}">
+        </div>
+        <input class="btn btn-danger" type="submit" value="Удалить">
+        <a class="nav-link" href="{% url 'post_list'%}">Отмена</a>
+    </form>
 {% endblock content %}

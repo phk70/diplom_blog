@@ -26,19 +26,11 @@ def post_add(request):
     return render(request, 'blog/post_add.html')
 
 def post_delete(request, pk):
-    pass
+    post = Post.objects.get(pk=pk)
+    if request.method == "POST":
+        post.delete()
+        return redirect('/', permanent=True)      
+    return render(request, "blog/post_delete.html", {'post': post})
 
 def post_update(request, pk):
     pass
-
-def add_product(request):
-    if request.method == "POST":
-        title = request.POST.get("title")
-        description = request.POST.get("description")
-        measurement = request.POST.get("measurement")
-        price = request.POST.get("price")
-        photo = request.FILES["photo"]
-        product = Products(title=title, description=description, measurement=measurement, price=price, photo=photo)
-        product.save() 
-        return redirect('/', permanent=True)       
-    return render(request, "core/add_product.html")
