@@ -22,21 +22,23 @@
 </head>
 <body>
     <header>
-        <div class="page-header">
-            <div class="row">
-                <div class="col-3">
-                    <h1><a href="/">TravelMap</a></h1>
-                </div>
-                <div class="col-9 d-flex align-items-center justify-content-end fs-5">
-                    {% if user.is_authenticated %}
-                        <a href="{% url 'users:logout' %}"/>Выход</a>
-                        <a href="{% url 'users:profile' %}"/>Профиль</a>
-                        {% else %}
-                        <a href="{% url 'users:login' %}"/>Вход</a>
-                    {% endif %}
-                </div>
-            </div>            
-        </div> 
+        <nav>
+            <div class="page-header">
+                <div class="row">
+                    <div class="col-3">
+                        <h1><a href="/">TravelMap</a></h1>
+                    </div>
+                    <div class="col-9 d-flex align-items-center justify-content-end fs-5">
+                        {% if request.user.is_authenticated %}
+                            <a href="{% url 'users:logout' %}"/>Выход</a>
+                            <a href="{% url 'users:profile' %}"/>Профиль</a>
+                            {% else %}
+                            <a href="{% url 'users:login' %}"/>Вход</a>
+                        {% endif %}
+                    </div>
+                </div>            
+            </div>
+        </nav>
     </header>       
     <div class="container">
         <div class="row">

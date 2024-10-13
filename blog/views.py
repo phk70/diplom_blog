@@ -1,13 +1,10 @@
-from cgitb import text
-from turtle import title
 from django.utils import timezone
 from django.shortcuts import redirect, render, get_object_or_404
 from .models import Post
+from django.views.generic import TemplateView
 
 
 def post_list(request):
-    # posts=Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
-    # posts = Post.objects.all()
     qset = Post.objects.all()
     posts = qset.order_by('published_date')
     return render(request, 'blog/post_list.html', {'posts': posts})
@@ -47,3 +44,12 @@ def post_update(request, pk):
         post.save()
         return redirect('/', permanent=True)    
     return render(request, 'blog/post_update.html', {"post": post})
+
+
+class Custom403View(TemplateView):
+    template_name = '403.html'
+    status_code = 403
+
+class Custom404View(TemplateView):
+    template_name = '404.html'
+    status_code = 404

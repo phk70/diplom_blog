@@ -14,7 +14,7 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
+    
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -22,6 +22,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'blog',
     'users',
+    'django.contrib.admin',
 ]
 
 MIDDLEWARE = [
@@ -95,4 +96,4 @@ MEDIA_ROOT = BASE_DIR/"media"
 LOGIN_REDIRECT_URL = "blog:post_list"
 # LOGIN_URL = 'users:login'
 
-# LOGOUT_REDIRECT_URL = "blog:post_list"
+LOGOUT_REDIRECT_URL = "blog:post_list"
