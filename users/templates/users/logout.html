@@ -1,0 +1,18 @@
+{% extends "blog/base.html" %}
+{% load static %}
+
+{% block content %}
+    <div class="container pb-3">
+        <h1>Вы вышли</h1>
+        {% comment %} <form method="post">
+            {% csrf_token %}
+            <div>
+                <label>Имя пользователя:</label>
+                <p class="mb-3">{{ form.username }}</p>                
+                <label>Пароль:</label>
+                <p class="mb-3">{{ form.password }}</p>                
+            </div>
+            <button class="btn btn-success" type="submit">Регистрация</button>
+        </form> {% endcomment %}
+    </div>
+{% endblock content %}
