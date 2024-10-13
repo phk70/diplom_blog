@@ -10,6 +10,6 @@
             <img="{{ post.photo.url }}">
         </div>
         <input class="btn btn-danger" type="submit" value="Удалить">
-        <a class="nav-link" href="{% url 'post_detail' pk=post.pk%}">Отмена</a>
+        <a class="nav-link" href="{% url 'blog:post_detail' pk=post.pk%}">Отмена</a>
     </form>
 {% endblock content %}

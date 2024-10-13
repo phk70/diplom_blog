@@ -6,12 +6,12 @@
         {% if post.published_date %}            
         <div class="row">
             <div class="col-6 d-flex align-items-center justify-content-start width-30px">
-                <a class="bi bi-arrow-left fs-4" href="{% url 'post_list' %}"></a>
+                <a class="bi bi-arrow-left fs-4" href="{% url 'blog:post_list' %}"></a>
                 <h1>{{ post.title }}</h1>
             </div>
             <div class="col-6 d-flex align-items-center justify-content-end">
-                <a class="bi bi-pencil fs-4" href="{% url 'post_update' pk=post.pk %}"></a>
-                <a class="bi bi-file-earmark-x fs-4" href="{% url 'post_delete' pk=post.pk %}"></a>
+                <a class="bi bi-pencil fs-4" href="{% url 'blog:post_update' pk=post.pk %}"></a>
+                <a class="bi bi-file-earmark-x fs-4" href="{% url 'blog:post_delete' pk=post.pk %}"></a>
             </div>
         </div>
             {% if post.image %}

@@ -9,7 +9,7 @@
                     <p class="mb-1">Опубликовано: {{ post.published_date }}</p>
                     <p>Автор: {{ post.author }}</p>
                 </div>                        
-                <h1><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
+                <h1><a href="{% url 'blog:post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
                 {% if post.image %}
                     <img src="{{ post.image.url }}" width="300">
                 {% endif %}    
