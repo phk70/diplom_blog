@@ -16,6 +16,7 @@
             <input class="mb-3" type="file" accept="image/*" name="image" id="image">            
             <br>
             <button class="btn btn-success" type="submit" name="Add" value="Add">Изменить</button>
+            <a class="nav-link" href="{% url 'post_detail' pk=post.pk%}">Отмена</a>
         </div>
     </form>
 </div>
