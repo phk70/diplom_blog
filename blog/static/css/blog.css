@@ -54,21 +54,28 @@ h1, h2, h3, h4 {
 .post {
     box-shadow: 0px 5px 5px gray;
     padding: 1rem;
-    transition: 1s;
-}
+    transition: 0.3s;
+    min-width: 620px;
+    }
 
 .post:hover {
-    transform: scale(1.03);
-    /* transition: 1s; */
+    transform: scale(1.01);
+    box-shadow: 5px 10px 5px darkgray;
 }
 
 .post h1 a, .post h1 a:visited {
     color: #000000;
+    text-decoration: none;
+}
+
+.post a {
+    text-decoration: none;
+    color: dimgray;
 }
 
 .post-list-text {
     display: -webkit-box;
-    -webkit-line-clamp: 8;
+    -webkit-line-clamp: 6;
     -webkit-box-orient: vertical;  
     overflow: hidden;
 }
