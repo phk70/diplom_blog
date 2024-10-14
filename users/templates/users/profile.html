@@ -2,7 +2,67 @@
 {% load static %}
 
 {% block content %}
-    <div class="container pb-3">
-        <h1>Профиль</h1>        
-    </div>
+<h1>Профиль</h1>         
+<div class="row"> 
+ <div class="col-4"> 
+    <img src="" class="rounded-circle"> 
+   </div> 
+   <div class="col-3"> 
+    <p class="mb-3 d-flex justify-content-end"> Имя пользователя:<p> 
+       <p class="mb-3 d-flex justify-content-end"> Город:<p> 
+       <p class="mb-3 d-flex justify-content-end"> Email:<p> 
+       <p class="mb-3 d-flex justify-content-end"> Телефон:<p>                         
+       <p class="mb-3 d-flex justify-content-end"> Пол:<p> 
+       <p class="mb-3 d-flex justify-content-end"> Возраст:<p> 
+       <a href="{% url 'blog:posts_user' id=user.id %}"><p class="mb-3 d-flex justify-content-end"> Количество публикаций:<p></a> 
+   </div> 
+   <div class="col-5"> 
+    <p class="mb-3"> {{user.username}}<p> 
+       <p class="mb-3"> {{user.city}}<p> 
+       <p class="mb-3"> {{user.email}}<p> 
+       <p class="mb-3"> {{user.phone_number}}<p> 
+       <p class="mb-3"> {{user.sex}}<p> 
+       <p class="mb-3"> {{user.age}}<p> 
+       <p class="mb-3"> {{user.post_count}}<p> 
+   </div> 
+</div> 
+<div class="row">                   
+    <p class="mb-3">Расскажите немного о себе<p> 
+    <input class="align-top" style="width: 100%; height:150px" type"textarea"> 
+</div>                         
+<div class="row">                   
+<p class="mb-3">Все медиа пользователя<p> 
+{% comment %} {% if user.post.image %} 
+  <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel"> 
+     <div class="carousel-indicators"> 
+
+       <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>  
+       {% for i in range(1, 10) %} 
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="i" aria-label="Slide 2"></button>         
+       {% endfor %} 
+     </div> 
+     <div class="carousel-inner"> 
+
+         {% for image in images %} 
+           <div class="carousel-item active"> 
+             <img src="{{ user.post.image.url }}" class="d-block w-100" alt="..."> 
+           </div> 
+         {% endfor %} 
+          
+     </div> 
+     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev"> 
+       <span class="carousel-control-prev-icon" aria-hidden="true"></span> 
+       <span class="visually-hidden">Назад</span> 
+     </button> 
+     <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next"> 
+       <span class="carousel-control-next-icon" aria-hidden="true"></span> 
+       <span class="visually-hidden">Вперед</span> 
+     </button> 
+   </div>   
+   {% else %} 
+    <span>У пользователя пока нет записей</span> 
+ {% endif %}    
+  {% endcomment %}
+ 
+</div>
 {% endblock content %}

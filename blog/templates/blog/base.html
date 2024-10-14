@@ -28,19 +28,21 @@
                     <div class="col-3">
                         <h1><a href="/">TravelMap</a></h1>
                     </div>
-                    <div class="col-9 d-flex align-items-center justify-content-end fs-5">
-                        {% if request.user.is_authenticated %}
-                            {% comment %} <a href="{% url 'users:logout' %}"/>Выход</a> {% endcomment %}
-                            
-                            <form method="post" action="{% url 'users:logout' %}">
-                                {% csrf_token %}
-                                <button type="submit">logout</button>
-                            </form>
-
-                            <a href="{% url 'users:profile' %}"/>Профиль</a>
-                            {% else %}
-                            <a href="{% url 'users:login' %}"/>Вход</a>
-                        {% endif %}
+                    <div class="col-9 d-flex align-items-center justify-content-end fs-5">                        
+                        <form method="post" action="{% url 'users:logout' %}"> 
+                            {% csrf_token %} 
+                            {% if user.is_authenticated %} 
+                                <div class="btn-group" role="group" aria-label="Basic example"> 
+                                    <a href="{% url 'users:profile' %}"/><button type="button" class="btn bg-transparent text-body" style="font-family: Lobster; font-size: 20pt; text-decoration: none; color: #ffffff">{{user.username}}</button></a>
+                                    <a href="{% url 'users:logout' %}"/><button type="submit" class="btn bg-transparent text-body" style="font-family: Lobster; font-size: 20pt; text-decoration: none; color: #ffffff">Выход</button></a> 
+                                </div> 
+                                {% else %} 
+                                <div class="btn-group" role="group" aria-label="Basic example">                                      
+                                    <a href="{% url 'users:register' %}"/><button type="button" class="btn bg-transparent text-body" style="font-family: Lobster; font-size: 20pt; text-decoration: none; color: #ffffff">Регистрация</button></a>   
+                                    <a href="{% url 'users:login' %}"/><button type="button" class="btn bg-transparent text-body" style="font-family: Lobster; font-size: 20pt; text-decoration: none; color: #ffffff">Вход</button></a> 
+                                </div>
+                            {% endif %}
+                        </form>                        
                     </div>
                 </div>            
             </div>

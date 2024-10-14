@@ -4,6 +4,7 @@ from .models import Post
 from django.views.generic import TemplateView
 
 
+
 def post_list(request):
     qset = Post.objects.all()
     posts = qset.order_by('published_date')
@@ -11,7 +12,7 @@ def post_list(request):
 
 
 def post_detail(request, pk):
-    post = get_object_or_404(Post, pk=pk)
+    post = get_object_or_404(Post, pk=pk)   
     return render(request, 'blog/post_detail.html', {'post': post})
 
 def post_add(request):
@@ -45,6 +46,9 @@ def post_update(request, pk):
         return redirect('/', permanent=True)    
     return render(request, 'blog/post_update.html', {"post": post})
 
+
+def posts_user(request, id):    
+    return render(request, 'blog/posts_user.html', {'posts': Post.objects.filter(author=request.user.id)})
 
 class Custom403View(TemplateView):
     template_name = '403.html'

@@ -2,11 +2,13 @@ from django.db import models
 
 from django.conf import settings
 from django.utils import timezone
+from django.contrib.auth.models import User
+
 
 
 class Post(models.Model):
     """Модель поста"""
-    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=200, verbose_name='Заголовок')
     text = models.TextField(verbose_name='Текст поста')
     created_date = models.DateTimeField(default=timezone.now, verbose_name='Дата создания')

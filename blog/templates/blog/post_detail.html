@@ -10,8 +10,10 @@
                 <h1>{{ post.title }}</h1>
             </div>
             <div class="col-6 d-flex align-items-center justify-content-end">
-                <a class="bi bi-pencil fs-4" href="{% url 'blog:post_update' pk=post.pk %}"></a>
-                <a class="bi bi-file-earmark-x fs-4" href="{% url 'blog:post_delete' pk=post.pk %}"></a>
+                {% if author.id == 'user.id' %} 
+                    <a class="bi bi-pencil fs-4" href="{% url 'blog:post_update' pk=post.pk %}"></a>
+                    <a class="bi bi-file-earmark-x fs-4" href="{% url 'blog:post_delete' pk=post.pk %}"></a>
+                {% endif %}
             </div>
         </div>
             {% if post.image %}
