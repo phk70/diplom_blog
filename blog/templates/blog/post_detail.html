@@ -10,7 +10,7 @@
                 <h1>{{ post.title }}</h1>
             </div>
             <div class="col-6 d-flex align-items-center justify-content-end">
-                {% if author.id == 'user.id' %} 
+                {% if post.author.username == post.author %} 
                     <a class="bi bi-pencil fs-4" href="{% url 'blog:post_update' pk=post.pk %}"></a>
                     <a class="bi bi-file-earmark-x fs-4" href="{% url 'blog:post_delete' pk=post.pk %}"></a>
                 {% endif %}

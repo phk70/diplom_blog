@@ -2,6 +2,7 @@ from django.utils import timezone
 from django.shortcuts import redirect, render, get_object_or_404
 from .models import Post
 from django.views.generic import TemplateView
+from django.contrib.auth.decorators import login_required
 
 
 
@@ -15,6 +16,8 @@ def post_detail(request, pk):
     post = get_object_or_404(Post, pk=pk)   
     return render(request, 'blog/post_detail.html', {'post': post})
 
+
+@login_required
 def post_add(request):
     if request.method == "POST":        
         title = request.POST.get('title')
@@ -25,6 +28,8 @@ def post_add(request):
         return redirect('/', permanent=True)    
     return render(request, 'blog/post_add.html')
 
+
+@login_required
 def post_delete(request, pk):
     post = Post.objects.get(pk=pk)
     if request.method == "POST":
@@ -32,6 +37,8 @@ def post_delete(request, pk):
         return redirect('/', permanent=True)      
     return render(request, "blog/post_delete.html", {'post': post})
 
+
+@login_required
 def post_update(request, pk):
     
     post = Post.objects.get(pk=pk)
@@ -49,6 +56,7 @@ def post_update(request, pk):
 
 def posts_user(request, id):    
     return render(request, 'blog/posts_user.html', {'posts': Post.objects.filter(author=request.user.id)})
+
 
 class Custom403View(TemplateView):
     template_name = '403.html'
