@@ -5,7 +5,8 @@ h1 a {
 
 body {
     padding-left: 15px;           
-    padding-right: 15px;           
+    padding-right: 15px;  
+    color: dimgray;         
 }
 
 .page-header {
@@ -24,6 +25,14 @@ nav {
     text-decoration: none;
 }
 
+.text-body {
+    font-family: 'Lobster', cursive;
+    --bs-text-opacity: 1;
+    color: dimgray !important;
+    font-size: 25pt;
+    text-decoration: none;
+}
+
 .content {
     margin-left: 40px;
 }
@@ -33,7 +42,7 @@ h1, h2, h3, h4 {
 }
 
 .date {
-    color: #828282;
+    color: dimgray;
 }
 
 .save {
@@ -68,9 +77,13 @@ h1, h2, h3, h4 {
     text-decoration: none;
 }
 
+.post h1, .post p {
+    color: dimgray
+}
+
 .post a {
     text-decoration: none;
-    color: dimgray;
+    color: #000000;
 }
 
 .post-list-text {
