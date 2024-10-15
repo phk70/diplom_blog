@@ -10,7 +10,7 @@ def register(request):
         if form.is_valid():
             user = form.save()            
             login(request, user)
-            return redirect('blog:post_list')
+            return redirect('blog:post_list', permanent=True)
     form = NewUserForm()        
     return render(request, 'users/register.html', {"form": form})
 
