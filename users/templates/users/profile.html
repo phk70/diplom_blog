@@ -4,8 +4,10 @@
 {% block content %}
     <h1>Профиль</h1>         
     <div class="row"> 
-        <div class="col-4"> 
-            <img src="" class="rounded-circle"> 
+        <div class="col-4 d-flex align-items-center"> 
+            {% if user.profile.image %}
+                <img src="{{ user.profile.image.url }}" class="rounded-circle" width=100%> 
+            {% endif %}
         </div> 
         <div class="col-3"> 
             <p class="mb-3 d-flex justify-content-end"> Имя пользователя:<p> 
@@ -17,17 +19,13 @@
             <a href="{% url 'blog:posts_user' id=user.id %}"><p class="mb-3 d-flex justify-content-end">Записи пользователя</p></a>
         </div>
         <div class="col-5"> 
-            <p class="mb-3"> {{user.username}}<p> 
-            <p class="mb-3"> {{user.city}}<p> 
-            <p class="mb-3"> {{user.email}}<p> 
-            <p class="mb-3"> {{user.contact_number}}<p> 
-            <p class="mb-3"> {{user.sex}}<p> 
-            <p class="mb-3"> {{user.age}}<p> 
-            <p class="mb-3"> {{user.post_count}}<p> 
+            <p class="mb-3"> {{ user.username }}<p> 
+            <p class="mb-3"> {{ user.profile.city }}<p> 
+            <p class="mb-3"> {{ user.email }}<p> 
+            <p class="mb-3"> {{ user.profile.contact_number}}<p> 
+            <p class="mb-3"> {{ user.profile.sex }}<p> 
+            <p class="mb-3"> {{ user.profile.age }}<p> 
+            {% comment %} <p class="mb-3"> {{ postcount }}<p>  {% endcomment %}
         </div> 
-    </div> 
-    <div class="row">                   
-        <p class="mb-3">Расскажите немного о себе<p> 
-        <input class="align-top" style="width: 100%; height:150px" type"textarea"> 
-    </div>
+    </div>     
 {% endblock content %}
