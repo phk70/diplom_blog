@@ -14,7 +14,8 @@
             <p class="mb-3 d-flex justify-content-end"> Телефон:<p>                         
             <p class="mb-3 d-flex justify-content-end"> Пол:<p> 
             <p class="mb-3 d-flex justify-content-end"> Возраст:<p> 
-            <a href="{% url 'blog:posts_user' id=user.id %}"><p class="mb-3 d-flex justify-content-end
+            <a href="{% url 'blog:posts_user' id=user.id %}"><p class="mb-3 d-flex justify-content-end">Записи пользователя</p></a>
+        </div>
         <div class="col-5"> 
             <p class="mb-3"> {{user.username}}<p> 
             <p class="mb-3"> {{user.city}}<p> 
