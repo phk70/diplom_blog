@@ -1,31 +1,56 @@
 {% extends "blog/base.html" %}
-{% load static %}
 
 {% block content %}
-    <h1>Профиль</h1>         
-    <div class="row"> 
-        <div class="col-4 d-flex align-items-center"> 
-            {% if user.profile.image %}
-                <img src="{{ user.profile.image.url }}" class="rounded-circle" width=100%> 
-            {% endif %}
-        </div> 
-        <div class="col-3"> 
-            <p class="mb-3 d-flex justify-content-end"> Имя пользователя:<p> 
-            <p class="mb-3 d-flex justify-content-end"> Город:<p> 
-            <p class="mb-3 d-flex justify-content-end"> Email:<p> 
-            <p class="mb-3 d-flex justify-content-end"> Телефон:<p>                         
-            <p class="mb-3 d-flex justify-content-end"> Пол:<p> 
-            <p class="mb-3 d-flex justify-content-end"> Возраст:<p> 
-            <a href="{% url 'blog:posts_user' id=user.id %}"><p class="mb-3 d-flex justify-content-end">Записи пользователя</p></a>
+    {% if user.profile %}
+        <h1>Профиль</h1>         
+        <div class="row"> 
+            <div class="col-4 d-flex align-items-center"> 
+                {% if user.profile.image %}
+                    <img src="{{ user.profile.image.url }}" class="rounded-circle" width=200px> 
+                {% endif %}
+            </div> 
+            <div class="col-3"> 
+                <p class="mb-3 d-flex justify-content-end"> Имя пользователя:<p> 
+                <p class="mb-3 d-flex justify-content-end"> Город:<p> 
+                <p class="mb-3 d-flex justify-content-end"> Email:<p> 
+                <p class="mb-3 d-flex justify-content-end"> Телефон:<p>                         
+                <p class="mb-3 d-flex justify-content-end"> Пол:<p> 
+                <p class="mb-3 d-flex justify-content-end"> Возраст:<p> 
+                <a href="{% url 'blog:posts_user' id=user.id %}"><p class="mb-3 d-flex justify-content-end">Записи пользователя</p></a>
+            </div>
+            <div class="col-5"> 
+                <p class="mb-3"> {{ user.username }}<p> 
+                <p class="mb-3"> {{ user.profile.city }}<p> 
+                <p class="mb-3"> {{ user.email }}<p> 
+                <p class="mb-3"> {{ user.profile.contact_number}}<p> 
+                <p class="mb-3"> {{ user.profile.sex }}<p> 
+                <p class="mb-3"> {{ user.profile.age }}<p> 
+                <p class="mb-3"> {{ posts.count }}<p> 
+            </div> 
+        </div>  
+    {% else %}
+        <div>
+            <h1>Заполнение профиля</h1>
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div>    
+                    <input class="mb-3" type="file" accept="image/*" name="upload" id="upload" required>            
+                    <br>        
+                    <input class="mb-3" type="text" placeholder="Город" name="city" id="city">
+                    <br>            
+                    <input class="mb-3" type="text" placeholder="Телефон +7.........." name="contact_number" id="contact_number">
+                    <br>
+                    <input class="mb-3" type="text" placeholder="Ваш пол" name="sex" id="sex" list="sexy">
+                        <datalist id="sexy">
+                            <option value="мужской" />
+                            <option value="женский" />                
+                        </datalist>
+                    <br>
+                    <input class="mb-3" type="number" placeholder="Ваш возраст" name="age" id="age">            
+                    <br>
+                    <button class="btn btn-success" type="submit" name="Add" value="Add">Сохранить</button>            
+                </div>
+            </form>
         </div>
-        <div class="col-5"> 
-            <p class="mb-3"> {{ user.username }}<p> 
-            <p class="mb-3"> {{ user.profile.city }}<p> 
-            <p class="mb-3"> {{ user.email }}<p> 
-            <p class="mb-3"> {{ user.profile.contact_number}}<p> 
-            <p class="mb-3"> {{ user.profile.sex }}<p> 
-            <p class="mb-3"> {{ user.profile.age }}<p> 
-            {% comment %} <p class="mb-3"> {{ postcount }}<p>  {% endcomment %}
-        </div> 
-    </div>     
+    {% endif %}   
 {% endblock content %}
