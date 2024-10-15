@@ -13,17 +13,26 @@ body {
     background-color: #ff9400;
     margin-top: 0;
     padding: 20px 20px 20px 20px;
+    min-width: 910px;
 }
 
 nav {
     box-shadow: 0px 5px 5px gray;
 }
 
-.page-header h1, .page-header h1 a, .page-header h1 a:visited, .page-header h1 a:active {
-    color: #ffffff;
-    font-size: 36pt;
+.search-button {
+    color: dimgray;
+    font-size: 42px;
     text-decoration: none;
 }
+
+.page-header h1, .page-header h1 a, .page-header h1 a:visited, .page-header h1 a:active {
+    color: #ffffff;
+    font-size: 42pt;
+    text-decoration: none;
+}
+
+
 
 .text-body {
     font-family: 'Lobster', cursive;
@@ -52,13 +61,13 @@ h1, h2, h3, h4 {
 .post-form textarea, .post-form input {
     width: 100%;
 }
-
+/* 
 .top-menu, .top-menu:hover, .top-menu:visited {
     color: #ffffff;
     float: right;
     font-size: 26pt;
     margin-right: 20px;
-}
+} */
 
 .post {
     box-shadow: 0px 5px 5px gray;
@@ -96,3 +105,7 @@ h1, h2, h3, h4 {
 .published p {
     text-align: end;
 }
+
+
+
+

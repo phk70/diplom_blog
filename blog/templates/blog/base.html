@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="{% static 'css/blog.css' %}">
 </head>
 <body>
+    <div class="btn-up btn-up_hide"></div>
     <header>
         <nav>
             <div class="page-header">
@@ -28,7 +29,20 @@
                     <div class="col-3">
                         <h1><a href="/">TravelMap</a></h1>
                     </div>
-                    <div class="col-9 d-flex align-items-center justify-content-end fs-5">                        
+                    {% if user.is_authenticated %}
+                    <div class="col-3 d-flex align-items-center"> 
+                        <a href="{% url 'blog:post_add' %}"/><button type="button" class="btn bg-transparent text-body">Добавить запись</button></a> 
+                    </div>                    
+                    {% endif %}
+                    <div class="col-3 d-flex align-items-center">                        
+                        <form>
+                            <div class="d-flex align-items-center justify-content-end fs-5">
+                                <input class="form-control me-2" type="search" aria-label="Search"> 
+                                <a class="search-button bi bi-search fs-4 me-3 d-flex align-items-center" href="{% url 'blog:post_list' %}"><button class="btn bg-transparent text-body" type="submit"></button></a>
+                            </div>                            
+                        </form>                          
+                    </div>                        
+                    <div class="col-3 d-flex align-items-center justify-content-end fs-5">                        
                         <form method="post" action="{% url 'users:logout' %}"> 
                             {% csrf_token %} 
                             {% if user.is_authenticated %} 
@@ -37,8 +51,7 @@
                                     <a href="{% url 'users:logout' %}"/><button type="submit" class="btn bg-transparent text-body">Выход</button></a> 
                                 </div> 
                                 {% else %} 
-                                <div class="btn-group" role="group" aria-label="Basic example">                                      
-                                    <a href="{% url 'users:register' %}"/><button type="button" class="btn bg-transparent text-body">Регистрация</button></a>   
+                                <div class="btn-group" role="group" aria-label="Basic example">  
                                     <a href="{% url 'users:login' %}"/><button type="button" class="btn bg-transparent text-body">Вход</button></a> 
                                 </div>
                             {% endif %}
@@ -55,6 +68,6 @@
                 {% endblock content %}
             
         </div>
-    </div>    
+    </div>
 </body>
 </html>
