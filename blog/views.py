@@ -16,6 +16,7 @@ class PostListView(ListView):
     model = Post
     template_name = "blog/post_list.html"
     context_object_name = "posts"
+    ordering = ['-published_date']
 
 
 # def post_detail(request, pk):
