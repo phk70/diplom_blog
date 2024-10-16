@@ -1,3 +1,4 @@
+from tabnanny import verbose
 from django.db import models
 
 from django.conf import settings
@@ -21,3 +22,7 @@ class Post(models.Model):
 
     def __str__(self) -> str:
         return self.title
+    
+    class Meta:
+        verbose_name = "Запись"
+        verbose_name_plural = "Записи"
