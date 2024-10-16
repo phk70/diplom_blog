@@ -3,17 +3,30 @@ from django.shortcuts import redirect, render, get_object_or_404
 from .models import Post
 from django.views.generic import TemplateView
 from django.contrib.auth.decorators import login_required
+from django.views.generic import ListView, DetailView
+from django.views.generic.edit import CreateView, DeleteView, UpdateView
 
 
 
-def post_list(request):    
-    posts =Post.objects.order_by('-published_date')
-    return render(request, 'blog/post_list.html', {'posts': posts})
+# def post_list(request):    
+#     posts =Post.objects.order_by('-published_date')
+#     return render(request, 'blog/post_list.html', {'posts': posts})
+
+class PostListView(ListView):
+    model = Post
+    template_name = "blog/post_list.html"
+    context_object_name = "posts"
 
 
-def post_detail(request, pk):
-    post = get_object_or_404(Post, pk=pk)       
-    return render(request, 'blog/post_detail.html', {'post': post})
+# def post_detail(request, pk):
+#     post = get_object_or_404(Post, pk=pk)       
+#     return render(request, 'blog/post_detail.html', {'post': post})
+
+
+class PostDetailView(DetailView):
+    model = Post
+    template_name = "blog/post_detail.html"
+    context_object_name = "post"
 
 
 @login_required
@@ -35,6 +48,9 @@ def post_delete(request, pk):
         post.delete()
         return redirect('/', permanent=True)      
     return render(request, "blog/post_delete.html", {'post': post})
+
+class PostDeleteView(DetailView):
+    pass
 
 
 @login_required

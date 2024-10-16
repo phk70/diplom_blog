@@ -4,6 +4,7 @@ from .forms import NewUserForm
 from .models import Profile
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 
 def register(request):
     if request.method =="POST":
@@ -29,3 +30,8 @@ def profile(request):
         profile.save()
         return redirect('users:profile', permanent=True)
     return render(request, "users/profile.html")
+
+
+def user_profile(request, id):
+    user = User.objects.get(id=id)
+    return render(request, "users/user_profile.html", {"user":user})
