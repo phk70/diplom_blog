@@ -4,23 +4,24 @@
 {% block content %}
     <div class="post">
         {% if post.published_date %}            
-        <div class="row">
-            <div class="col-6 d-flex align-items-center justify-content-start width-30px">
-                <a class="bi bi-arrow-left fs-4 me-3" href="{% url 'blog:post_list' %}"></a>
-                <h1>{{ post.title }}</h1>
-            </div>
-            <div class="col-6 d-flex align-items-center justify-content-end">
-                {% if user.id == post.author.id %} 
-                    <a class="bi bi-pencil fs-4" href="{% url 'blog:post_update' pk=post.pk %}"></a>
-                    <a class="bi bi-file-earmark-x fs-4 ms-3" href="{% url 'blog:post_delete' pk=post.pk %}"></a>
-                {% endif %}
-            </div>
-        </div>
-            {% if post.image %}
-                <img src="{{ post.image.url }}" width="400px">        
-            {% endif %}    
-            <p class="mt-3">{{ post.text | linebreaksbr }}</p>
-        {% endif %}
         
+                <div class="col-12">
+                    <div class="d-flex align-items-center justify-content-between mb-3">
+                        <a class="bi bi-arrow-left fs-4 me-3" href="{% url 'blog:post_list' %}"></a>
+                        <h2 class="mb-0">{{ post.title }}</h2>
+                        {% if user.id == post.author.id %}
+                            <div class="d-flex justify-content-end">
+                                <a class="bi bi-pencil fs-4" href="{% url 'blog:post_update' pk=post.pk %}"></a>
+                                <a class="bi bi-file-earmark-x fs-4 ms-3" href="{% url 'blog:post_delete' pk=post.pk %}"></a>
+                            </div>
+                        {% endif %}
+                    </div>
+                    {% if post.image %}
+                        <img src="{{ post.image.url }}" class="img-fluid mb-3" alt="{{ post.title }}" width=300px>
+                    {% endif %}
+                    <p>{{ post.text | linebreaksbr }}</p>
+                </div>
+            
+        {% endif %}
     </div>
 {% endblock content %}

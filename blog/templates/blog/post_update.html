@@ -2,22 +2,30 @@
 
 {% block title %}TravelMap - Обновление записи {{ post.title }}{% endblock title %}
 {% block content %}
-<div>
-    <h1>Изменение записи {{ post.title }}</h1>
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        <div>            
-            <input class="mb-3" type="text" value="{{ post.title }}" placeholder="Заголовок записи" name="title" id="title">
-            <br>            
-            <input class="mb-3" type="text" value="{{ post.text }}" placeholder="Основной текст" name="text" id="text">
-            <br>
-            <img src="{{ post.photo.url }}" width="500">
-            <br>
-            <input class="mb-3" type="file" accept="image/*" name="image" id="image">            
-            <br>
-            <button class="btn btn-warning" type="submit" name="Add" value="Add">Изменить</button>
-            <a class="nav-link" href="{% url 'blog:post_detail' pk=post.pk%}">Отмена</a>            
+
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-8 col-lg-6">
+            <h2 class="mb-4">Изменение записи {{ post.title }}</h2>
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <input class="form-control" type="text" value="{{ post.title }}" placeholder="Заголовок записи" name="title" id="title">
+                </div>
+                <div class="mb-3">
+                    <textarea class="form-control" rows="5" placeholder="Основной текст" name="text" id="text">{{ post.text }}</textarea>
+                </div>
+                {% if post.image %}
+                    <img src="{{ post.image.url }}" class="img-fluid mb-3" alt="{{ post.title }}">
+                {% endif %}
+                <div class="mb-3">
+                    <input class="form-control" type="file" accept="image/*" name="image" id="image">
+                </div>
+                <div class="d-flex justify-content-between">
+                    <button class="btn btn-warning" type="submit" name="Add" value="Add">Изменить</button>
+                    <a class="btn btn-secondary" href="{% url 'blog:post_detail' pk=post.pk %}">Отмена</a>
+                </div>
+            </form>
         </div>
-    </form>
-</div>
+    </div>
+
 {% endblock content %}

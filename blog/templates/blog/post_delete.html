@@ -2,14 +2,22 @@
 
 {% block title %}TravelMap - Удаление записи{% endblock title %}
 {% block content %}
-    <h1>Удаление продукта</h1>
-    <form method="post">
-        {% csrf_token %}
-        <div>
-            <label class="block text-gray text-sm font mb-2">Вы уверены что хотите удалить запись {{ post.title }}?</label>            
-            <img="{{ post.photo.url }}">
+
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-8 col-lg-6">
+            <h1 class="mb-4">Удаление записи</h1>
+            <form method="post">
+                {% csrf_token %}
+                <p>Вы уверены, что хотите удалить запись "{{ post.title }}"?</p>
+                {% if post.image %}
+                    <img src="{{ post.image.url }}" class="img-fluid mb-3" alt="{{ post.title }}">
+                {% endif %}
+                <div class="d-flex justify-content-between">
+                    <input class="btn btn-danger" type="submit" value="Удалить">
+                    <a class="btn btn-secondary" href="{% url 'blog:post_detail' pk=post.pk %}">Отмена</a>
+                </div>
+            </form>
         </div>
-        <input class="btn btn-danger" type="submit" value="Удалить">
-        <a class="nav-link" href="{% url 'blog:post_detail' pk=post.pk%}">Отмена</a>
-    </form>
+    </div>
+
 {% endblock content %}

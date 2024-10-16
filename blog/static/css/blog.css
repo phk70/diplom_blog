@@ -9,13 +9,6 @@ body {
     color: dimgray;         
 }
 
-.page-header {
-    background-color: #ff9400;
-    margin-top: 0;
-    padding: 20px 20px 20px 20px;
-    min-width: 910px;
-}
-
 nav {
     box-shadow: 0px 5px 5px gray;
 }
@@ -31,8 +24,6 @@ nav {
     font-size: 42pt;
     text-decoration: none;
 }
-
-
 
 .text-body {
     font-family: 'Lobster', cursive;
@@ -61,13 +52,6 @@ h1, h2, h3, h4 {
 .post-form textarea, .post-form input {
     width: 100%;
 }
-/* 
-.top-menu, .top-menu:hover, .top-menu:visited {
-    color: #ffffff;
-    float: right;
-    font-size: 26pt;
-    margin-right: 20px;
-} */
 
 .post {
     box-shadow: 0px 5px 5px gray;
@@ -86,7 +70,7 @@ h1, h2, h3, h4 {
     text-decoration: none;
 }
 
-.post h1, .post p {
+.post h1, .post p, .post a h2 {
     color: dimgray
 }
 
@@ -106,6 +90,113 @@ h1, h2, h3, h4 {
     text-align: end;
 }
 
+.page-header {
+    background-color: #ff9400;
+    margin-top: 0;
+    padding: 20px 20px 20px 20px;
+    max-width: 100%;
+    overflow-x: hidden;
+}
 
+  @media (max-width: 767px) {
+      
+  }
 
+  @media (max-width: 768px) {
+      .post {
+          min-width: auto;
+      }
+  
+      .page-header h1, .page-header h1 a {
+          font-size: 28pt;
+      } 
+  
+      .text-body {
+          font-size: 18pt;
+      }
+  }
+  @media (max-width: 1199px) {
+      .navbar-toggler {
+          display: block;
+      }
 
+      .offcanvas {
+          background-color: #ff9400;
+      }
+
+      .navbar-collapse {
+          position: absolute;
+          top: 100%;
+          left: 0;
+          right: 0;
+          background-color: #ff9400;
+          padding: 1rem;
+          z-index: 1000;
+      }
+
+      .navbar-nav {
+          flex-direction: column;
+      }
+
+      .navbar-nav .nav-item {
+          margin-bottom: 0.5rem;
+      }
+
+      .form-inline {
+          flex-direction: column;
+          align-items: stretch;
+      }
+
+      .form-inline .form-control {
+          margin-right: 0;
+          margin-bottom: 0.5rem;
+      }
+
+      .btn-group {
+          display: flex;
+          flex-direction: column;
+      }
+
+      .btn-group .btn {
+          margin-bottom: 0.5rem;
+      }
+  }
+
+  @media (max-width: 1199px) and (min-width: 768px) {
+      .navbar-brand h1 {
+          font-size: 24pt;
+      }
+  }
+    @media (max-width: 767px) {
+        .navbar-brand h1 {
+            font-size: 20pt;
+        }
+    
+        .offcanvas {
+            width: 75%;
+        }
+    }
+  }
+
+  @media (min-width: 1200px) {
+      .navbar-toggler {
+          display: none;
+      }
+    
+    .offcanvas {
+        position: static;
+        visibility: visible !important;
+        background-color: transparent;
+    }
+    
+    .offcanvas-header {
+        display: none;
+    }
+}
+@media (max-width: 767px) {
+    .offcanvas-body .btn {
+        font-size: 16pt;
+        text-align: left;
+        padding-left: 0;
+    }
+}
