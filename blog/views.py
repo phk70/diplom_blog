@@ -1,5 +1,7 @@
-from django.utils import timezone
 from django.shortcuts import redirect, render, get_object_or_404
+
+from django.urls import reverse_lazy
+from django.utils import timezone
 from .models import Post
 from django.views.generic import TemplateView
 from django.contrib.auth.decorators import login_required
@@ -7,24 +9,18 @@ from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 
 
-
-# def post_list(request):    
-#     posts =Post.objects.order_by('-published_date')
-#     return render(request, 'blog/post_list.html', {'posts': posts})
-
 class PostListView(ListView):
+    """Отображение всех постов с сортировкой по дате публикации"""
+
     model = Post
     template_name = "blog/post_list.html"
     context_object_name = "posts"
     ordering = ['-published_date']
 
 
-# def post_detail(request, pk):
-#     post = get_object_or_404(Post, pk=pk)       
-#     return render(request, 'blog/post_detail.html', {'post': post})
-
-
 class PostDetailView(DetailView):
+    """Отображение определенного поста по primary key"""
+
     model = Post
     template_name = "blog/post_detail.html"
     context_object_name = "post"
@@ -50,8 +46,11 @@ def post_delete(request, pk):
         return redirect('/', permanent=True)      
     return render(request, "blog/post_delete.html", {'post': post})
 
-class PostDeleteView(DetailView):
-    pass
+class PostDeleteView(DeleteView):
+    """Удаление определенного поста по primary key"""
+
+    model = Post
+    success_url = reverse_lazy('blog:post_list')
 
 
 @login_required
@@ -75,9 +74,13 @@ def posts_user(request, id):
 
 
 class Custom403View(TemplateView):
+    """Отображение шаблона при недостатке прав доступа"""
+    
     template_name = '403.html'
     status_code = 403
 
 class Custom404View(TemplateView):
+    """Отображение шаблона при отсутствии шаблона"""
+
     template_name = '404.html'
     status_code = 404
