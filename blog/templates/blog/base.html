@@ -23,44 +23,7 @@
 <body>
     <div class="btn-up btn-up_hide"></div>
     <header>
-        <nav class="navbar navbar-expand-md navbar-light">
-            <div class="container-fluid page-header">
-                <a class="navbar-brand" href="/"><h1>TravelMap</h1></a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#navbarOffcanvas" aria-controls="navbarOffcanvas" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="offcanvas offcanvas-end p-3" tabindex="-1" id="navbarOffcanvas" aria-labelledby="navbarOffcanvasLabel">
-                    <div class="offcanvas-header">                        
-                        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                    </div>
-                    <div class="d-flex justify-content-between">
-                        {% if user.is_authenticated %}                            
-                            <a class="nav-link" href="{% url 'blog:post_add' %}">Добавить запись</a>                            
-                        {% endif %}                        
-                        <form class="d-flex mb-3" action="{% url 'blog:search' %}" method="get">
-                            <input class="form-control me-2" 
-                                name="qsearch" 
-                                type="text" 
-                                placeholder="Что ищем?" 
-                                required oninvalid="this.setCustomValidity('Чтобы найти нужно спросить')" 
-                                oninput="setCustomValidity('')">
-                            <button class="btn btn-outline-light" type="submit">Поиск</button>
-                        </form>
-                        <form method="post" action="{% url 'users:logout' %}">
-                            {% csrf_token %}
-                            {% if user.is_authenticated %}
-                                <div class="d-flex flex-column">
-                                    <a href="{% url 'users:profile' %}" class="btn btn-outline-light mb-2">{{user.username}}</a>
-                                    <button type="submit" class="btn btn-outline-light">Выход</button>
-                                </div>
-                            {% else %}
-                                <a href="{% url 'users:login' %}" class="btn btn-outline-light">Вход</a>
-                            {% endif %}
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </nav>
+        {% include "blog/nav.html" %}
     </header>       
     <div class="container mb-3">
         <div class="row">
