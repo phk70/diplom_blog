@@ -12,7 +12,7 @@
                         {% if user.id == post.author.id %}
                             <div class="d-flex justify-content-end">
                                 <a class="bi bi-pencil fs-4" href="{% url 'blog:post_update' pk=post.pk %}"></a>
-                                <a class="bi bi-file-earmark-x fs-4 ms-3" href="{% url 'blog:post_confirm_0delete' pk=post.pk %}"></a>
+                                <a class="bi bi-file-earmark-x fs-4 ms-3" href="{% url 'blog:post_confirm_delete' pk=post.pk %}"></a>
                             </div>
                         {% endif %}
                     </div>

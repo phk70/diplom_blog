@@ -1,5 +1,6 @@
 from django.shortcuts import redirect, render, get_object_or_404
 
+from django.template.defaultfilters import lower
 from django.urls import reverse_lazy
 from django.utils import timezone
 from .models import Post
@@ -7,6 +8,7 @@ from django.views.generic import TemplateView
 from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
+from django.db.models import Q
 
 
 class PostListView(ListView):
@@ -38,14 +40,6 @@ def post_add(request):
     return render(request, 'blog/post_add.html')
 
 
-@login_required
-def post_delete(request, pk):
-    post = Post.objects.get(pk=pk)
-    if request.method == "POST":
-        post.delete()
-        return redirect('/', permanent=True)      
-    return render(request, "blog/post_delete.html", {'post': post})
-
 class PostDeleteView(DeleteView):
     """Удаление определенного поста по primary key"""
 
@@ -67,6 +61,20 @@ def post_update(request, pk):
         post.save()
         return redirect('/', permanent=True)    
     return render(request, 'blog/post_update.html', {"post": post})
+
+
+class SearchResultsView(ListView):
+    """Поиск постов"""
+    model = Post
+    template_name = 'blog/search.html'
+    context_object_name = "posts"    
+
+    def get_queryset(self):
+        query = self.request.GET.get('qsearch')        
+        posts = Post.objects.filter(Q(title__icontains =query) | Q(text__icontains=query))
+        return posts
+
+
 
 
 def posts_user(request, id):    

@@ -1,0 +1,32 @@
+{% extends "blog/base.html" %}
+
+{% block title %}TravelMap - Результаты поиска{% endblock title %}
+{% block content %}
+{% comment %} СТРОЧКУ НИЖЕ УДАЛИТЬ ПРИ ЗАВЕРШЕНИИ ОТЛАДКИ {% endcomment %}
+<h5 class="mb-3 mt-3" style="color: dimgray">Уважаемые гости! Сайт находится на этапе разработки и тестирования, некоторые функции могут не работать или работать не корректно. Все пофиксим в ближайшее время.</h5><hr>
+    {% for post in posts %}
+        <div class="col-12 col-md-8 m-3">
+            <div class="post"> 
+                <a href="{% url 'blog:post_detail' pk=post.pk %}">    
+                    <h2>{{ post.title }}</h2>
+                </a>
+                <div class="row">
+                    <div class="col-12 col-md-4 mb-3">
+                        {% if post.image %}
+                            <img class="img-fluid rounded mx-auto d-block" src="{{ post.image.url }}" alt="{{ post.title }}">
+                        {% endif %}    
+                    </div>
+                    <div class="col-12 col-md-8">
+                        <div class="published row">
+                            <p class="mb-1">Опубликовано: {{ post.published_date }}</p>
+                            <p>Автор: {{ post.author }}</p>
+                        </div>
+                        <div class="row">
+                            <p class="post-list-text">{{ post.text | linebreaksbr }}</p>
+                        </div>
+                    </div>   
+                </div>    
+            </div>            
+        </div>
+    {% endfor %}
+{% endblock content %}

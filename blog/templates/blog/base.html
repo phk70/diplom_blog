@@ -37,8 +37,13 @@
                         {% if user.is_authenticated %}                            
                             <a class="nav-link" href="{% url 'blog:post_add' %}">Добавить запись</a>                            
                         {% endif %}                        
-                        <form class="d-flex mb-3" action="{% url 'blog:post_list' %}" method="get">
-                            <input class="form-control me-2" type="search" placeholder="Поиск" aria-label="Search" name="search">
+                        <form class="d-flex mb-3" action="{% url 'blog:search' %}" method="get">
+                            <input class="form-control me-2" 
+                                name="qsearch" 
+                                type="text" 
+                                placeholder="Что ищем?" 
+                                required oninvalid="this.setCustomValidity('Чтобы найти нужно спросить')" 
+                                oninput="setCustomValidity('')">
                             <button class="btn btn-outline-light" type="submit">Поиск</button>
                         </form>
                         <form method="post" action="{% url 'users:logout' %}">
