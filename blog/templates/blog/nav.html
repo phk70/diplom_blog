@@ -11,27 +11,33 @@
             <div class="d-flex justify-content-between">
                 {% if user.is_authenticated %}     
                 <div class="d-flex flex-column">                       
-                    <a class="btn btn-transparent" href="{% url 'blog:post_add' %}" style="vertical-align: middle">Добавить запись</a>     
+                    <a href="{% url 'blog:post_add' %}">
+                        <button type="button" class="btn btn-transparent btn-lg">Добавить запись</button>
+                    </a>                            
                 </div>                       
                 {% endif %}                        
-                <form class="d-flex mb-3" action="{% url 'blog:search' %}" method="get">
+                <form class="d-flex" action="{% url 'blog:search' %}" method="get">
                     <input class="form-control me-2" 
                         name="qsearch" 
                         type="text" 
                         placeholder="Что ищем?" 
                         required oninvalid="this.setCustomValidity('Чтобы найти нужно спросить')" 
                         oninput="setCustomValidity('')">
-                    <button class="btn btn-transparent" type="submit">Поиск</button>
+                    <button class="btn btn-transparent btn-lg" type="submit">Поиск</button>
                 </form>
                 <form method="post" action="{% url 'users:logout' %}">
                     {% csrf_token %}
                     {% if user.is_authenticated %}
-                        <div class="d-flex flex-column">
-                            <a href="{% url 'users:profile' %}" class="btn btn-transparent mb-2">{{user.username}}</a>
-                            <button type="submit" class="btn btn-transparent">Выход</button>
-                        </div>
+                        <div class="d-flex">
+                            <a href="{% url 'users:profile' %}">
+                                <button type="button" class="btn btn-transparent btn-lg">{{user.username}}</button>
+                            </a>                                
+                            <button type="submit" class="btn btn-transparent btn-lg">Выход</button>
                     {% else %}
-                        <a href="{% url 'users:login' %}" class="btn btn-transparent">Вход</a>
+                        <a href="{% url 'users:login' %}">
+                            <button type="button" class="btn btn-transparent btn-lg">Вход</button>
+                        </a>
+                        </div>
                     {% endif %}
                 </form>
             </div>

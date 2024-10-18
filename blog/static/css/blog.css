@@ -9,10 +9,8 @@ body {
     color: dimgray;         
 }
 
-nav {
-    box-shadow: 0px 5px 5px gray;
-    font-family: 'Lobster', cursive;
-    
+nav {    
+    font-family: 'Lobster', cursive;       
 }
 
 .search-button {
@@ -94,10 +92,12 @@ h1, h2, h3, h4 {
 
 .page-header {
     background-color: #ff9400;
-    margin-top: 0;
-    padding: 20px 20px 20px 20px;
+    /* margin-top: 0; */
+    /* padding: 20px 20px 20px 00px; */
+    margin: 0px 20px 20px 00px;
     max-width: 100%;
     overflow-x: hidden;
+    box-shadow: 0px 10px 10px gray;    
 }
 
 @media (max-width: 767px) {
@@ -178,9 +178,9 @@ h1, h2, h3, h4 {
             width: 75%;
         }
     }
-}
 
-  @media (min-width: 1200px) {
+
+@media (min-width: 1200px) {
     .navbar-toggler {
         display: none;
     }
