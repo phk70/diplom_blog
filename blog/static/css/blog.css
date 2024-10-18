@@ -1,6 +1,7 @@
 h1 a {
     color: #FCA205;
     font-family: 'Lobster';
+    text-decoration: none;
 }
 
 body {
@@ -201,4 +202,21 @@ h1, h2, h3, h4 {
         text-align: left;
         padding-left: 0;
     }
+}
+
+.pagination .page-link {
+    color: #ff9400;
+    border-color: #ff9400;
+}
+
+.pagination .page-item.active .page-link {
+    background-color: #ff9400;
+    border-color: #ff9400;
+    color: white;
+}
+
+.pagination .page-link:hover {
+    background-color: #ffab40;
+    border-color: #ff9400;
+    color: white;
 }

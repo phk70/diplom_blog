@@ -18,6 +18,7 @@ class PostListView(ListView):
     template_name = "blog/post_list.html"
     context_object_name = "posts"
     ordering = ['-published_date']
+    paginate_by = 2
 
 
 class PostDetailView(DetailView):
@@ -67,7 +68,9 @@ class SearchResultsView(ListView):
     """Поиск постов"""
     model = Post
     template_name = 'blog/search.html'
-    context_object_name = "posts"    
+    context_object_name = "posts" 
+    ordering = ['-published_date']
+    
 
     def get_queryset(self):
         query = self.request.GET.get('qsearch')        
@@ -77,7 +80,7 @@ class SearchResultsView(ListView):
 
 
 
-def posts_user(request, id):    
+def posts_user(request, id): 
     return render(request, 'blog/posts_user.html', {'posts': Post.objects.filter(author=request.user.id)})
 
 
