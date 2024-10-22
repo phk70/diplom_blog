@@ -22,12 +22,22 @@
                     <p>{{ post.text | linebreaksbr }}</p>
                 </div>
                 <a href="{% url 'blog:comment_add' pk=post.pk%}">
-                    <button type="button" class="btn btn-transparent btn-lg">Добавить комментарий</button>
+                    <button type="button" class="btn btn-transparent btn-lg"><h2>Добавить комментарий</h2></button>
                 </a>
             
         {% endif %}
     </div>
-    <p>Комментарии</p>
-    {% for comment in  post.post.text%}{% endfor %}
-    <p>{{comment}}</p>
+    <div>
+        <h2>Комментарии</h2>
+    {% if comments %}
+        {% for comment in comments %}
+            <div class="comment">
+                <p><strong>{{ comment.author }}</strong> - {{ comment.created_date }}</p>
+                <p>{{ comment.text }}</p>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>Нет комментариев.</p>
+    {% endif %}
+    </div>
 {% endblock content %}

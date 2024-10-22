@@ -29,6 +29,11 @@ class PostDetailView(DetailView):
     template_name = "blog/post_detail.html"
     context_object_name = "post"
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['comments'] = Comment.objects.filter(post=self.object)
+        return context
+
 
 @login_required
 def post_add(request):
