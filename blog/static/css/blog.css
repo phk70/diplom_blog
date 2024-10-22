@@ -7,7 +7,7 @@ h1 a {
 body {
     padding-left: 15px;           
     padding-right: 15px;  
-    color: dimgray;         
+    color: dimgrey;         
 }
 
 nav {    
@@ -15,7 +15,7 @@ nav {
 }
 
 .search-button {
-    color: dimgray;
+    color: dimgrey;
     font-size: 42px;
     text-decoration: none;
 }
@@ -29,7 +29,7 @@ nav {
 .text-body {
     font-family: 'Lobster', cursive;
     --bs-text-opacity: 1;
-    color: dimgray !important;
+    color: dimgrey !important;
     font-size: 25pt;
     text-decoration: none;
 }
@@ -43,7 +43,7 @@ h1, h2, h3, h4 {
 }
 
 .date {
-    color: dimgray;
+    color: dimgrey;
 }
 
 .save {
@@ -72,7 +72,7 @@ h1, h2, h3, h4 {
 }
 
 .post h1, .post p, .post a h2 {
-    color: dimgray
+    color: dimgrey
 }
 
 .post a {
@@ -219,4 +219,17 @@ h1, h2, h3, h4 {
     background-color: #ffab40;
     border-color: #ff9400;
     color: white;
+}
+
+/* Стилизация кновки "Вверх" */
+.back-to-top {
+    display: none;
+    position: fixed;
+    bottom: 50px;
+    left: 50px;
+    background: #ffffff;
+    width: 50px;
+    height: 50px;    
+    border-radius: 50%;    
+    cursor: pointer;
 }
