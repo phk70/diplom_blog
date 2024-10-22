@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Post
+from .models import Post, Comment
 
 
 admin.site.site_header = "Блог TravelMap"
@@ -11,3 +11,10 @@ class PostAdmin(admin.ModelAdmin):
     search_fields = ("title",)
 
 admin.site.register(Post, PostAdmin)
+
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ("post", "author", "text", "created_date")
+    search_fields = ("text",)
+    sortable_by = ("created_date",)
+
+admin.site.register(Comment, CommentAdmin)

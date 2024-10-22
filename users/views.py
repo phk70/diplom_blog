@@ -6,15 +6,16 @@ from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 
+
 def register(request):
-    if request.method =="POST":
+    if request.method == "POST":
         form = NewUserForm(request.POST)
         if form.is_valid():
-            user = form.save()            
+            user = form.save()
             login(request, user)
-            return redirect('blog:post_list', permanent=True)
-    form = NewUserForm()        
-    return render(request, 'users/register.html', {"form": form})
+            return redirect("blog:post_list", permanent=True)
+    form = NewUserForm()
+    return render(request, "users/register.html", {"form": form})
 
 
 @login_required
@@ -26,12 +27,19 @@ def profile(request):
         age = request.POST.get("age")
         image = request.FILES["upload"]
         user = request.user
-        profile = Profile(user=user, contact_number=contact_number, image=image, city=city, sex=sex, age=age)
+        profile = Profile(
+            user=user,
+            contact_number=contact_number,
+            image=image,
+            city=city,
+            sex=sex,
+            age=age,
+        )
         profile.save()
-        return redirect('users:profile', permanent=True)
+        return redirect("users:profile", permanent=True)
     return render(request, "users/profile.html")
 
 
 def user_profile(request, id):
     user = User.objects.get(id=id)
-    return render(request, "users/user_profile.html", {"user":user})
+    return render(request, "users/user_profile.html", {"user": user})

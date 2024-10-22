@@ -9,7 +9,7 @@ from django.utils import timezone
 
 class Post(models.Model):
     """Модель поста"""
-    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name='Автор')
     title = models.CharField(max_length=200, verbose_name='Заголовок')
     text = models.TextField(verbose_name='Текст поста')
     created_date = models.DateTimeField(default=timezone.now, verbose_name='Дата создания')
@@ -26,3 +26,23 @@ class Post(models.Model):
     class Meta:
         verbose_name = "Запись"
         verbose_name_plural = "Записи"
+
+
+class Comment(models.Model):
+    """Модель комментария"""
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comments', verbose_name='Запись')
+    author = models.CharField(max_length=200, verbose_name='Автор')
+    text = models.TextField(verbose_name='Текст комментария')
+    created_date = models.DateTimeField(default=timezone.now, verbose_name='Дата создания')
+    approved_comment = models.BooleanField(default=False, verbose_name='Согласован')
+
+    def approve(self):
+        self.approved_comment = True
+        self.save()
+
+    def __str__(self):
+        return self.text
+    
+    class Meta:
+        verbose_name = "Комментарий"
+        verbose_name_plural = "Комментарии"

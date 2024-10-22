@@ -1,0 +1,19 @@
+{% extends "blog/base.html" %}
+
+{% block title %}TravelMap - Комментарий{% endblock title %}
+{% block content %}
+
+    <div class="row justify-content-center mt-5">
+        <div class="col-12 col-md-8 col-lg-6">
+            <h2 class="mb-4">Комментарий к записи {{info_post.title}}</h2>
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}                
+                <div class="mb-3">
+                    <textarea class="form-control" rows="5" placeholder="Комментарий" name="text" id="text"></textarea>
+                </div>                
+                <button class="btn btn-warning" type="submit" name="Add" value="Add">Опубликовать</button>
+            </form>
+        </div>
+    </div>
+
+{% endblock content %}
