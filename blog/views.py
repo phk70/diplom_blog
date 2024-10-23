@@ -23,7 +23,7 @@ class PostListView(ListView):
 
     def get_context_data(self, **kwargs):  
         context = super().get_context_data(**kwargs)
-        context['latest_comments'] = Comment.objects.all().order_by('-created_date')[:5]
+        context['latest_comments'] = Comment.objects.all().order_by('-created_date')[:10]
         return context
 
 
