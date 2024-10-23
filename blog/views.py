@@ -39,6 +39,17 @@ class PostDetailView(DetailView):
         context['comments'] = Comment.objects.filter(post=self.object)
         return context
 
+    def post(self, request, *args, **kwargs):
+        post = self.get_object()
+        if request.method == "POST":
+            comment = Comment(
+                post=post,
+                author=request.user,
+                text=request.POST.get("text")
+            )
+            comment.save()
+        return redirect("blog:post_detail", pk=post.pk)
+
 
 @login_required
 def post_add(request):

@@ -234,11 +234,20 @@ h1, h2, h3, h4 {
     cursor: pointer;
 }
 
-/* 
-.modal-body textarea {
-    width: 100%;
-    min-height: 150px;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-} */
+
+
+
+.modal-content {
+    border-radius: 8px;
+    border: none;
+}
+
+.modal-header {
+    background-color: #ff9400;
+    color: white;
+    border-radius: 8px 8px 0 0;
+}
+
+.modal-footer {
+    border-top: none;
+}
