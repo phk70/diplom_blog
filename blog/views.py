@@ -21,10 +21,15 @@ class PostListView(ListView):
     ordering = ["-published_date"]
     paginate_by = 3
 
+    def get_context_data(self, **kwargs):  
+        context = super().get_context_data(**kwargs)
+        context['latest_comments'] = Comment.objects.all().order_by('-created_date')[:5]
+        return context
+
 
 class PostDetailView(DetailView):
-    """Отображение определенного поста по primary key"""
-
+    """Отображение определенного поста по primary key + отображение комментариев к постам"""    
+    
     model = Post
     template_name = "blog/post_detail.html"
     context_object_name = "post"

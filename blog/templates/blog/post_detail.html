@@ -28,10 +28,10 @@
         {% endif %}
     </div>
     <div>
-        <h2>Комментарии</h2>
+        <h2 class="mt-5">Комментарии</h2>
     {% if comments %}
         {% for comment in comments %}
-            <div class="comment">
+            <div class="post mt-3">
                 <p><strong>{{ comment.author }}</strong> - {{ comment.created_date }}</p>
                 <p>{{ comment.text }}</p>
             </div>
@@ -41,3 +41,45 @@
     {% endif %}
     </div>
 {% endblock content %}
+
+{% comment %} 
+<!-- Заменяем блок формы комментария на: -->
+<div class="mb-4">
+    <h3>Комментарии</h3>
+    
+      {% if user.is_authenticated %}
+    <button type="button" class="btn btn-dark mb-3" data-bs-toggle="modal" data-bs-target="#commentModal">
+    <i class="bi bi-chat-dots me-1"></i> Оставить комментарий
+    </button>
+    
+      {% else %}
+    <p>Пожалуйста, <a href="{% url 'login' %}?next={{ request.path }}">войдите</a>, чтобы оставить комментарий.</p>
+    
+      {% endif %}
+     
+      <!-- Добавляем модальное окно -->
+    <div class="modal fade" id="commentModal" tabindex="-1" aria-labelledby="commentModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+    <div class="modal-content">
+    <div class="modal-header">
+    <h5 class="modal-title" id="commentModalLabel">Новый комментарий</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <form method="post" action="{% url 'post_by_slug' post.slug %}">
+    <div class="modal-body">
+    
+                {% csrf_token %}
+    
+                {{ form.as_p }}
+    </div>
+    <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+    <button type="submit" class="btn btn-dark">Отправить</button>
+    </div>
+    </form>
+    </div>
+    </div>
+    </div>
+    </div>
+    
+      {% endcomment %}

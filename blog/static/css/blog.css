@@ -233,3 +233,12 @@ h1, h2, h3, h4 {
     border-radius: 50%;    
     cursor: pointer;
 }
+
+/* 
+.modal-body textarea {
+    width: 100%;
+    min-height: 150px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+} */
