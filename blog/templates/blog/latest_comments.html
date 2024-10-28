@@ -4,6 +4,9 @@
         <small class="comment-date">{{ comment.created_date }}</small><br>
         <span class="comment-author fw-bold">{{ comment.author }}</span><br>
         <span class="comment-text">{{ comment.text|truncatechars:100 }}</span><br>
-        <a href="{% url 'blog:post_detail' pk=comment.post.pk %}">Перейти к записи</a>
+        <div class="row" style="text-align:end">
+            <a href="{% url 'blog:post_detail' pk=comment.post.pk %}">Перейти к записи</a>
+        </div>
+        
     </div>
 {% endfor %}

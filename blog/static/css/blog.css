@@ -1,3 +1,17 @@
+a {
+    text-decoration: none;
+}
+
+.comment-card a {
+    text-decoration: none;
+    font-family: 'Lobster';
+    color: dimgrey;
+}
+
+.latest-comments h3 {
+    text-align: center;
+}
+
 h1 a {
     color: #FCA205;
     font-family: 'Lobster';

@@ -30,7 +30,15 @@
                                 <p class="post-list-text">{{ post.text | linebreaksbr }}</p>
                             </div>
                         </div>   
-                    </div>    
+                    </div> 
+                    <div class="row">  {% comment %} иконка количества комментов {% endcomment %}
+                        <div class="col-12 d-flex justify-content-end">
+                            <span class="badge bg-warning rounded-pill">
+                                <i class="bi bi-chat-dots me-1"></i>
+                                {{ post.comments.count }}
+                            </span>
+                        </div>
+                    </div>   
                 </div>            
             {% endfor %}
             {% include "blog/paginator.html" %}
@@ -56,10 +64,12 @@
             });
     }
     // Интервал обновления
-    setInterval(updateComments, 5000);
+    setInterval(updateComments, 555000);
 
     // Первоначальная загрузка комментов
     updateComments();
 </script>
 </div>
 {% endblock content %}
+
+
