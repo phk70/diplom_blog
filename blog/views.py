@@ -1,5 +1,5 @@
 from django.contrib import auth
-from django.shortcuts import redirect, render, get_object_or_404
+from django.shortcuts import redirect, render, get_object_or_404, HttpResponse
 
 from django.urls import reverse_lazy
 from django.utils import timezone
@@ -10,6 +10,7 @@ from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.db.models import Q
 from .forms import CommentForm
+from django.template.loader import render_to_string
 
 
 class PostListView(ListView):
@@ -20,11 +21,14 @@ class PostListView(ListView):
     context_object_name = "posts"
     ordering = ["-published_date"]
     paginate_by = 3
+    
 
-    def get_context_data(self, **kwargs):  
-        context = super().get_context_data(**kwargs)
-        context['latest_comments'] = Comment.objects.all().order_by('-created_date')[:10]
-        return context
+def get_latest_comments(request):
+    """Отображение 5 последних комментариев"""    
+    
+    latest_comments = Comment.objects.all().order_by('-created_date')[:5]
+    html = render_to_string('blog/latest_comments.html', {'latest_comments': latest_comments})
+    return HttpResponse(html)
 
 
 class PostDetailView(DetailView):
@@ -144,3 +148,6 @@ class Custom404View(TemplateView):
 
     template_name = "404.html"
     status_code = 404
+
+
+

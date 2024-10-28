@@ -2,10 +2,12 @@
 
 {% block title %}TravelMap - Все маршруты{% endblock title %}
 {% block content %}
+
 {% comment %} СТРОЧКУ НИЖЕ УДАЛИТЬ ПРИ ЗАВЕРШЕНИИ ОТЛАДКИ {% endcomment %}
 <h5 class="mb-3 mt-3" style="color: dimgray mt-5">Уважаемые гости! Сайт находится на этапе разработки и тестирования, некоторые функции могут не работать или работать не корректно. Все пофиксим в ближайшее время.</h5><hr>
 <div class="container">
     <div class="row">
+
         <!-- Колонка с постами -->
         <div class="col-12 col-lg-9">
             {% for post in posts %}
@@ -36,18 +38,28 @@
         
         <!-- Колонка с комментариями -->
         <div class="col-lg-3 d-none d-lg-block">
-            <div class="latest-comments">
-                <h3>Последние комментарии</h3>
-                {% for comment in latest_comments %}
-                    <div class="comment-card">
-                        <small class="comment-date">{{ comment.created_date }}</small><br>
-                        <span class="comment-author fw-bold">{{ comment.author }}</span><br>
-                        <span class="comment-text">{{ comment.text|truncatechars:100 }}</span>                        
-                        <a href="{% url 'blog:post_detail' pk=comment.post.pk %}">Смотреть</a>
-                    </div>
-                {% endfor %}
+            <div class="latest-comments" id="latest-comments">
+                <!-- Содержимое которое будет обновляться через AJAX -->
             </div>
         </div>
     </div>
+</div>
+
+
+<script>
+    // Обновление блока комментов каждые 5 секунд
+    function updateComments() {
+        fetch('{% url "blog:get_latest_comments" %}')
+            .then(response => response.text())
+            .then(html => {
+                document.getElementById('latest-comments').innerHTML = html;
+            });
+    }
+    // Интервал обновления
+    setInterval(updateComments, 5000);
+
+    // Первоначальная загрузка комментов
+    updateComments();
+</script>
 </div>
 {% endblock content %}

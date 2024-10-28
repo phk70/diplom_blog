@@ -2,8 +2,14 @@
 
 {% block title %}TravelMap - 403{% endblock title %}
 {% block content %}
-<div>
-    <h1 class="pb-3">Ошибка 403</h1>  
-    <h1>Простите, у вас нет прав на просмотр этой страницы.</h1>    
+<div class="container error-page">
+    <div class="row justify-content-center">
+        <div class="col-md-6 text-center">
+            <h1>403</h1>
+            <h2>Доступ запрещен</h2>
+            <p>У вас недостаточно прав для просмотра этой страницы</p>
+            <a href="{% url 'blog:post_list' %}" class="btn btn-warning">На главную</a>
+        </div>
+    </div>
 </div>
 {% endblock content %}

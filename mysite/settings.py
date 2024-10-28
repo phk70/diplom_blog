@@ -11,7 +11,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -96,3 +96,6 @@ LOGIN_REDIRECT_URL = "blog:post_list"
 LOGIN_URL = 'users:login'
 
 LOGOUT_REDIRECT_URL = "blog:post_list"
+
+HANDLER404 = 'blog.views.Custom404View.as_view()'
+HANDLER403 = 'blog.views.Custom403View.as_view()'
