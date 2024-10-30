@@ -24,9 +24,9 @@ class PostListView(ListView):
     
 
 def get_latest_comments(request):
-    """Отображение 5 последних комментариев"""    
+    """Отображение 10 последних комментариев"""    
     
-    latest_comments = Comment.objects.all().order_by('-created_date')[:5]
+    latest_comments = Comment.objects.all().order_by('-created_date')[:10]
     html = render_to_string('blog/latest_comments.html', {'latest_comments': latest_comments})
     return HttpResponse(html)
 

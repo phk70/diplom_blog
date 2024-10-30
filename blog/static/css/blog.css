@@ -5,7 +5,7 @@ a {
 .comment-card a {
     text-decoration: none;
     font-family: 'Lobster';
-    color: dimgrey;
+    color: dimgrey;    
 }
 
 .latest-comments h3 {
@@ -13,7 +13,7 @@ a {
 }
 
 h1 a {
-    color: #FCA205;
+    color: #ff9400;
     font-family: 'Lobster';
     text-decoration: none;
 }
@@ -92,6 +92,10 @@ h1, h2, h3, h4 {
 .post a {
     text-decoration: none;
     color: #000000;
+}
+
+.badge {
+    background-color: #ff9400;
 }
 
 .post-list-text {
@@ -230,7 +234,7 @@ h1, h2, h3, h4 {
 }
 
 .pagination .page-link:hover {
-    background-color: #ffab40;
+    background-color: #ff9400;
     border-color: #ff9400;
     color: white;
 }
@@ -273,13 +277,15 @@ h1, h2, h3, h4 {
     padding: 20px;
     border-radius: 5px;
     box-shadow: 0px 5px 5px gray;
-    position: sticky;
+    /* position: sticky; */
     top: 20px;
 }
 
 .comment-card {
     padding: 15px;    
     border-bottom: 3px solid #eee;
+    overflow-x: hidden;
+    border-radius: 5px;
 }
 
 /* Стилизация страницы 403 и 404 */
