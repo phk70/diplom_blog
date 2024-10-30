@@ -137,14 +137,14 @@ def comment_add(request, pk):
 
 
 class Custom403View(TemplateView):
-    """Отображение шаблона при недостатке прав доступа"""
+    """Отображение шаблона 403 при недостатке прав доступа"""
 
     template_name = "403.html"
     status_code = 403
 
 
 class Custom404View(TemplateView):
-    """Отображение шаблона при отсутствии шаблона"""
+    """Отображение 404 при отсутствии шаблона"""
 
     template_name = "404.html"
     status_code = 404
