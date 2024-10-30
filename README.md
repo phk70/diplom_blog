@@ -15,9 +15,9 @@
 <ul>
   <li>Python</li>
   <li>Django</li>
-  <li>HTML, CSS JS</li>
+  <li>HTML, CSS, JS</li>
   <li>BootStrap 5</li>
-  <li>TelegramBotAPI</li>
+  <li>TelegramBot</li>
 </ul>
 <br>
 
