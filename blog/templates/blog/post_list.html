@@ -1,75 +1,32 @@
 {% extends "blog/base.html" %}
 
-{% block title %}TravelMap - Все маршруты{% endblock title %}
+{% block title %}TravelMap - Обновление записи {{ post.title }}{% endblock title %}
 {% block content %}
 
-{% comment %} СТРОЧКУ НИЖЕ УДАЛИТЬ ПРИ ЗАВЕРШЕНИИ ОТЛАДКИ {% endcomment %}
-<h5 class="mb-3 mt-3" style="color: dimgray mt-5">Уважаемые гости! Сайт находится на этапе разработки и тестирования, некоторые функции могут не работать или работать не корректно. Все пофиксим в ближайшее время.</h5><hr>
-<div class="container">
-    <div class="row">
-
-        <!-- Колонка с постами -->
-        <div class="col-12 col-lg-9">
-            {% for post in posts %}
-                <div class="post">
-                    <a href="{% url 'blog:post_detail' pk=post.pk %}">    
-                        <h2>{{ post.title }}</h2>
-                    </a>
-                    <div class="row">
-                        <div class="col-12 col-md-4 mb-3">
-                            {% if post.image %}
-                                <img class="img-fluid rounded mx-auto d-block" src="{{ post.image.url }}" alt="{{ post.title }}">
-                            {% endif %}    
-                        </div>
-                        <div class="col-12 col-md-8">
-                            <div class="published row">
-                                <p class="mb-1">Опубликовано: {{ post.published_date }}</p>
-                                <p>Автор: {{ post.author }}</p>
-                            </div>
-                            <div class="row">
-                                <p class="post-list-text">{{ post.text | linebreaksbr }}</p>
-                            </div>
-                        </div>   
-                    </div> 
-                    <div class="row">  {% comment %} иконка количества комментов {% endcomment %}
-                        <div class="col-12 d-flex justify-content-end">
-                            <span class="badge rounded-pill">
-                                <i class="bi bi-chat-dots me-1"></i>
-                                {{ post.comments.count }}
-                            </span>
-                        </div>
-                    </div>   
-                </div>            
-            {% endfor %}
-            {% include "blog/paginator.html" %}
-        </div>
-        
-        <!-- Колонка с комментариями -->
-        <div class="col-lg-3 d-none d-lg-block">
-            <div class="latest-comments" id="latest-comments">
-                <!-- Содержимое которое будет обновляться через AJAX -->
-            </div>
+    <div class="row justify-content-center mt-5">
+        <div class="col-12 col-md-8 col-lg-6">
+            <h2 class="mb-4">Изменение записи {{ post.title }}</h2>
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <input class="form-control" type="text" value="{{ post.title }}" placeholder="Заголовок записи" name="title" id="title">
+                </div>
+                <div class="mb-3">
+                    <textarea class="form-control" rows="5" placeholder="Основной текст" name="text" id="text">{{ post.text }}</textarea>
+                </div>
+                {% if post.image %}
+                    <img src="{{ post.image.url }}" class="img-fluid mb-3" alt="{{ post.title }}">
+                {% endif %}
+                <div class="mb-3">
+                    <input class="form-control" type="file" accept="image/*" name="image" id="image">
+                </div>
+                <div class="d-flex justify-content-between">
+                    <button class="btn btn-warning" type="submit" name="Add" value="Add">Изменить</button>
+                    <a class="btn btn-secondary" href="{% url 'blog:post_detail' pk=post.pk %}">Отмена</a>
+                </div>
+            </form>
         </div>
     </div>
-</div>
 
-
-<script>
-    // Обновление блока комментов каждые 5 секунд
-    function updateComments() {
-        fetch('{% url "blog:get_latest_comments" %}')
-            .then(response => response.text())
-            .then(html => {
-                document.getElementById('latest-comments').innerHTML = html;
-            });
-    }
-    // Интервал обновления
-    setInterval(updateComments, 5000);
-
-    // Первоначальная загрузка комментов
-    updateComments();
-</script>
-</div>
 {% endblock content %}
-
-
+{% endblock content %}
