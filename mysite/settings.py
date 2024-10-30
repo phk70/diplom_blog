@@ -99,3 +99,6 @@ LOGOUT_REDIRECT_URL = "blog:post_list"
 
 HANDLER404 = 'blog.views.Custom404View.as_view()'
 HANDLER403 = 'blog.views.Custom403View.as_view()'
+
+TELEGRAM_BOT_TOKEN = os.getenv('TELEGRAM_BOT_TOKEN')
+YOUR_PERSONAL_CHAT_ID = os.getenv('YOUR_PERSONAL_CHAT_ID')
