@@ -9,7 +9,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.db.models import Q
-from .forms import CommentForm
+from .forms import CommentForm, PostForm
 from django.template.loader import render_to_string
 
 
@@ -39,11 +39,15 @@ class PostDetailView(DetailView):
     context_object_name = "post"
 
     def get_context_data(self, **kwargs):
+        """Добавление комментариев к посту"""
+
         context = super().get_context_data(**kwargs)
         context['comments'] = Comment.objects.filter(post=self.object)
         return context
 
     def post(self, request, *args, **kwargs):
+        """Добавление комментария к посту"""
+
         post = self.get_object()
         if request.method == "POST":
             comment = Comment(
@@ -55,22 +59,35 @@ class PostDetailView(DetailView):
         return redirect("blog:post_detail", pk=post.pk)
 
 
-@login_required
+# @login_required
 def post_add(request):
+    """Добавление нового поста"""
+
     if request.method == "POST":
-        title = request.POST.get("title")
-        image = request.FILES["image"]
-        text = request.POST.get("text")
-        post = Post(
-            author=request.user,
-            title=title,
-            image=image,
-            text=text,
-            published_date=timezone.now(),
-        )
-        post.save()
-        return redirect("/", permanent=True)
-    return render(request, "blog/post_add.html")
+        form = PostForm(request.POST, request.FILES)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.author = request.user
+            post.published_date = timezone.now()
+            post.save()
+            return redirect('blog:post_detail', pk=post.pk)
+        return render(request, 'blog/post_add.html', {'form': form})
+    form = PostForm()
+    return render(request, 'blog/post_add.html', {'form': form})
+
+    #     title = request.POST.get("title")
+    #     image = request.FILES["image"]
+    #     text = request.POST.get("text")
+    #     post = Post(
+    #         author=request.user,
+    #         title=title,
+    #         image=image,
+    #         text=text,
+    #         published_date=timezone.now(),
+    #     )
+    #     post.save()
+    #     return redirect("/", permanent=True)
+    # return render(request, "blog/post_add.html")
 
 
 class PostDeleteView(DeleteView):
@@ -82,6 +99,7 @@ class PostDeleteView(DeleteView):
 
 @login_required
 def post_update(request, pk):
+    """Редактирование определенного поста по primary key"""
 
     post = Post.objects.get(pk=pk)
     if request.method == "POST":
@@ -113,6 +131,8 @@ class SearchResultsView(ListView):
 
 
 def posts_user(request, id):
+    """Отображение постов определенного пользователя"""
+
     return render(
         request,
         "blog/posts_user.html",# 
@@ -122,6 +142,8 @@ def posts_user(request, id):
 
 @login_required
 def comment_add(request, pk):
+    """Добавление комментария к посту"""
+
     post = get_object_or_404(Post, pk=pk)
     if request.method == "POST":
         form = CommentForm(request.POST)

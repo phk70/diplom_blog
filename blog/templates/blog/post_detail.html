@@ -22,7 +22,7 @@
                 {% if post.image %}
                     <img src="{{ post.image.url }}" class="img-fluid mb-3" alt="{{ post.title }}" width=300px>
                 {% endif %}
-                <p>{{ post.text | linebreaksbr }}</p>
+                <p>{{ post.text|safe|linebreaksbr }}</p>
             </div>            
         {% endif %}
     </div>

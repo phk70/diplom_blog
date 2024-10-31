@@ -8,15 +8,8 @@
             <h2 class="mb-4">Новая запись</h2>
             <form method="post" enctype="multipart/form-data">
                 {% csrf_token %}
-                <div class="mb-3">
-                    <input class="form-control" type="text" placeholder="Заголовок записи" name="title" id="title">
-                </div>
-                <div class="mb-3">
-                    <textarea class="form-control" rows="5" placeholder="Основной текст" name="text" id="text"></textarea>
-                </div>
-                <div class="mb-3">
-                    <input class="form-control" type="file" accept="image/*" name="image" id="image">
-                </div>
+                {{ form.media }}
+                {{ form.as_p }}
                 <button class="btn btn-warning" type="submit" name="Add" value="Add">Опубликовать</button>
             </form>
         </div>

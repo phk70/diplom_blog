@@ -23,6 +23,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'blog',
     'users',
+    'ckeditor',
+    'ckeditor_uploader',
 ]
 
 MIDDLEWARE = [
@@ -86,7 +88,7 @@ USE_I18N = True
 USE_TZ = True
 
 STATIC_URL = '/static/'
-STATIC_ROOT = BASE_DIR / 'staticfiles'  # Изменили путь
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_DIRS = [
     BASE_DIR / "static"
 ] 
@@ -108,3 +110,18 @@ TELEGRAM_BOT_TOKEN = os.getenv('TELEGRAM_BOT_TOKEN')
 YOUR_PERSONAL_CHAT_ID = os.getenv('YOUR_PERSONAL_CHAT_ID')
 
 CSRF_TRUSTED_ORIGINS = ['https://trip-map.ru', 'https://*.127.0.0.1']
+
+CKEDITOR_UPLOAD_PATH = "uploads/"
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': [
+        [   '-', 'Bold', 'Italic', 'Underline',            
+            '-', 'Image'                       
+        ],        
+        ],
+        'height':300,
+        'width': '100%',
+        'toolbarCanCollapse': False,
+        'forcePasteAsPlainText': True
+    }
+}
