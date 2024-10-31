@@ -3,55 +3,54 @@
 {% block title %}TripMap - {{ post.title }}{% endblock title %}
 {% block content %}
     <div class="post mt-5">
-        {% if post.published_date %}            
-        
-                <div class="col-12">
-                    <div class="row">
-                        <div class="col-2 d-flex align-items-center justify-content-between mb-3">
-                            <a class="bi bi-arrow-left fs-4 me-3" href="{% url 'blog:post_list' %}"></a>
-                        </div>
-                        <div class="col-8 d-flex align-items-center justify-content-between mb-3">    
-                            <h2 class="mb-0">{{ post.title }}</h2>
-                        </div>
-                        <div class="col-2 d-flex align-items-center justify-content-end mb-3">
-                            {% if user.id == post.author.id %}                                
-                                    <a class="bi bi-pencil fs-4" href="{% url 'blog:post_update' pk=post.pk %}"></a>
-                                    <a class="bi bi-file-earmark-x fs-4 ms-3" href="{% url 'blog:post_confirm_delete' pk=post.pk %}"></a>                                
-                            {% endif %}
-                        </div>
+        {% if post.published_date %}       
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-2 d-flex align-items-center justify-content-between mb-3">
+                        <a class="bi bi-arrow-left fs-4 me-3" href="{% url 'blog:post_list' %}"></a>
                     </div>
-                    {% if post.image %}
-                        <img src="{{ post.image.url }}" class="img-fluid mb-3" alt="{{ post.title }}" width=300px>
-                    {% endif %}
-                    <p>{{ post.text | linebreaksbr }}</p>
+                    <div class="col-8 d-flex align-items-center justify-content-between mb-3">    
+                        <h2 class="mb-0">{{ post.title }}</h2>
+                    </div>
+                    <div class="col-2 d-flex align-items-center justify-content-end mb-3">
+                        {% if user.id == post.author.id %}                                
+                            <a class="bi bi-pencil fs-4" href="{% url 'blog:post_update' pk=post.pk %}"></a>
+                            <a class="bi bi-file-earmark-x fs-4 ms-3" href="{% url 'blog:post_confirm_delete' pk=post.pk %}"></a>                                
+                        {% endif %}
+                    </div>
                 </div>
-            
+                {% if post.image %}
+                    <img src="{{ post.image.url }}" class="img-fluid mb-3" alt="{{ post.title }}" width=300px>
+                {% endif %}
+                <p>{{ post.text | linebreaksbr }}</p>
+            </div>            
         {% endif %}
     </div>
 
     <button type="button" class="btn btn-warning btn-lg custom-btn mt-3" data-bs-toggle="modal" data-bs-target="#commentModal">
         <i class="bi bi-chat-dots me-2"></i>Добавить комментарий
     </button>
-      <!-- Модальное окно -->
-      <div class="modal fade" id="commentModal" tabindex="-1">
-          <div class="modal-dialog modal-dialog-centered">
-              <div class="modal-content">
-                  <div class="modal-header">
-                      <h5 class="modal-title">Добавить комментарий</h5>
-                      <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                  </div>
-                  <form method="post">
-                      {% csrf_token %}
-                      <div class="modal-body">
-                          <textarea class="form-control" name="text" rows="5" placeholder="Ваш комментарий"></textarea>
-                      </div>
-                      <div class="modal-footer">                          
-                          <button type="submit" class="btn btn-warning">Опубликовать</button>
-                      </div>
-                  </form>
-              </div>
-          </div>
-      </div>
+
+        {% comment %} Модальное окно с комментариями{% endcomment %}
+        <div class="modal fade" id="commentModal" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Добавить комментарий</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="modal-body">
+                            <textarea class="form-control" name="text" rows="5" placeholder="Ваш комментарий"></textarea>
+                        </div>
+                        <div class="modal-footer">                          
+                            <button type="submit" class="btn btn-warning">Опубликовать</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     <div>
         <h2 class="mt-5">Комментарии</h2>
     {% if comments %}
@@ -66,44 +65,3 @@
     {% endif %}
     </div>
 {% endblock content %}
-{% comment %} 
-<!-- Заменяем блок формы комментария на: -->
-<div class="mb-4">
-    <h3>Комментарии</h3>
-    
-      {% if user.is_authenticated %}
-    <button type="button" class="btn btn-dark mb-3" data-bs-toggle="modal" data-bs-target="#commentModal">
-    <i class="bi bi-chat-dots me-1"></i> Оставить комментарий
-    </button>
-    
-      {% else %}
-    <p>Пожалуйста, <a href="{% url 'login' %}?next={{ request.path }}">войдите</a>, чтобы оставить комментарий.</p>
-    
-      {% endif %}
-     
-      <!-- Добавляем модальное окно -->
-    <div class="modal fade" id="commentModal" tabindex="-1" aria-labelledby="commentModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-    <div class="modal-content">
-    <div class="modal-header">
-    <h5 class="modal-title" id="commentModalLabel">Новый комментарий</h5>
-    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-    </div>
-    <form method="post" action="{% url 'post_by_slug' post.slug %}">
-    <div class="modal-body">
-    
-                {% csrf_token %}
-    
-                {{ form.as_p }}
-    </div>
-    <div class="modal-footer">
-    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
-    <button type="submit" class="btn btn-dark">Отправить</button>
-    </div>
-    </form>
-    </div>
-    </div>
-    </div>
-    </div>
-    
-      {% endcomment %}

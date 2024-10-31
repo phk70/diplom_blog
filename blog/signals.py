@@ -8,15 +8,13 @@ from datetime import datetime
 def new_post_signal(sender, instance, created, **kwargs):
     if created:
         message = f"""
-Cоздан новый пост: 
-Заголовок: {instance.title}
+Cоздан новый пост {instance.pk}-{instance.title}: 
 Автор: {instance.author}"""
         send_telegram_message(message)
     
     else:
         message = f"""
 Обновлен пост {instance.pk}-{instance.title}: 
-Заголовок: {instance.title}
 Автор: {instance.author}"""
         send_telegram_message(message)
 
@@ -25,6 +23,5 @@ Cоздан новый пост:
 def notify_about_post_delete(sender, instance, **kwargs):
     message = f"""
 Удален пост {instance.pk}-{instance.title} от {instance.published_date.strftime('%Y-%m-%d')}:
-Заголовок: {instance.title}
 Автор: {instance.author}"""
     send_telegram_message(message)

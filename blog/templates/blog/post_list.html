@@ -8,7 +8,7 @@
 <div class="container">
     <div class="row">
 
-        <!-- Колонка с постами -->
+        {% comment %} Колонка с постами {% endcomment %}
         <div class="col-12 col-lg-9">
             {% for post in posts %}
                 <div class="post">
@@ -44,10 +44,10 @@
             {% include "blog/paginator.html" %}
         </div>
         
-        <!-- Колонка с комментариями -->
+        {% comment %} Колонка с комментариями {% endcomment %}
         <div class="col-lg-3 d-none d-lg-block">
             <div class="latest-comments" id="latest-comments">
-                <!-- Содержимое которое будет обновляться через AJAX -->
+                {% comment %} Содержимое которое будет обновляться через AJAX {% endcomment %}
             </div>
         </div>
     </div>
@@ -63,8 +63,8 @@
                 document.getElementById('latest-comments').innerHTML = html;
             });
     }
-    // Интервал обновления
-    setInterval(updateComments, 5000);
+    // Интервал обновления комментариев
+    setInterval(updateComments, 10000);
 
     // Первоначальная загрузка комментов
     updateComments();
