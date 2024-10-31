@@ -9,7 +9,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.getenv('SECRET_KEY')
 
-DEBUG = True
+DEBUG = os.getenv('DEBUG', 'False') == 'True'   
 
 ALLOWED_HOSTS = ['*']
 
@@ -85,7 +85,10 @@ USE_I18N = True
 USE_TZ = True
 
 STATIC_URL = '/static/'
-STATIC_ROOT = BASE_DIR / 'satic'
+STATIC_ROOT = BASE_DIR / 'staticfiles'  # Изменили путь
+STATICFILES_DIRS = [
+    BASE_DIR / "static"
+] 
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
@@ -102,3 +105,5 @@ HANDLER403 = 'blog.views.Custom403View.as_view()'
 
 TELEGRAM_BOT_TOKEN = os.getenv('TELEGRAM_BOT_TOKEN')
 YOUR_PERSONAL_CHAT_ID = os.getenv('YOUR_PERSONAL_CHAT_ID')
+
+
