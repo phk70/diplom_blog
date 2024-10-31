@@ -106,4 +106,4 @@ HANDLER403 = 'blog.views.Custom403View.as_view()'
 TELEGRAM_BOT_TOKEN = os.getenv('TELEGRAM_BOT_TOKEN')
 YOUR_PERSONAL_CHAT_ID = os.getenv('YOUR_PERSONAL_CHAT_ID')
 
-
+SRF_TRUSTED_ORIGINS = ['https://trip-map.ru', 'https://*.127.0.0.1']
